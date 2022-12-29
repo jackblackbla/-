@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <math.h>
+
+void HanoiTowerMove(int n, char from, char by, char to) {
+    if (n == 1) {
+        printf("%c %c\n", from, to);
+    }
+    else {
+        HanoiTowerMove(n - 1, from, to, by);
+        printf("%c %c\n", from, to);
+        HanoiTowerMove(n - 1, by, from, to);
+    }
+}
+
+int main(void) {
+    int i;
+    int t;
+    scanf("%d", &i);
+
+    t = pow(2, i) - 1;
+    printf("%d\n", t);
+    HanoiTowerMove(i, '1', '2', '3');
+
+    
+} 
