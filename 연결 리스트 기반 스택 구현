@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "ListBaseStack.h"
+
+
+void StackInit(Stack* pstack) {
+	pstack->head = NULL;
+}
+
+int IsEmpty(Stack* pstack) {
+	if (pstack->head == NULL) return TRUE;
+	else return FALSE;
+}
+
+void Push(Stack* pstack, Data data) {
+	Node* newNode = (Node*)malloc(sizeof(Node));
+	newNode->data = data;
+
+	newNode->next = pstack->head;
+	pstack->head = newNode;
+}
+
+Data Pop(Stack* pstack) {
+	Data rdata;
+	Node* node;
+
+	if (IsEmpty(pstack)) {
+		printf("Stack Memory Error!");
+		exit(-1);
+	}
+
+	rdata = pstack->head->data;
+	node = pstack->head;
+
+	pstack->head = pstack->head->next;
+	free(node);
+	return rdata;
+
+}
+
+Data Peek(Stack* pstack) {
+
+	if (IsEmpty(pstack)) {
+		printf("Stack Memory Error!");
+		exit(-1);
+	}
+
+	return pstack->head->data;
+}
