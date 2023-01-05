@@ -1,0 +1,50 @@
+#include <stdio.h>
+#include "ListBaseQueue.h"
+
+void QueueInit(Queue* que) {
+    que->first = NULL;
+    que->rear = NULL;
+}
+int IsEmpty(Queue* que) {
+    if (que->first == NULL && que->rear == NULL) 
+        return TRUE;
+    else
+        return FALSE;
+}
+
+void Enqueue(Queue* que, int data) {
+    Node* newNode = (Node*)malloc(sizeof(Node));
+    newNode->data = data;
+    newNode->next = NULL;
+
+    if (IsEmpty(que)) {
+        que->first = newNode;
+        que->rear = newNode;
+    }
+    else {
+    que->rear->next = newNode;
+    que->rear = newNode;
+    }
+}
+int Dequeue(Queue* que) {
+
+    if (IsEmpty(que)) {
+        exit(-1);
+    }
+    int data;
+    Node* dnode;
+
+    dnode = que->first;
+    data = que->first->data;
+    que->first = que->first->next;
+
+    free(dnode);
+    return data;
+}
+
+int Peek(Queue* que) {
+    if (IsEmpty(que)) {
+        exit(-1);
+    }
+    return que->first->data;
+}
